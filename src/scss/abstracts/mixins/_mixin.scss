@@ -1,0 +1,10 @@
+@use '../variables' as *;
+
+//border radius
+@mixin bd-radius($position: false, $radius: $border-radius) {
+  @if $position {
+    border-#{$position}-radius: $radius;
+  } @else {
+    border-radius: $radius;
+  }
+}

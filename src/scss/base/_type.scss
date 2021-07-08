@@ -1,0 +1,59 @@
+@use '../abstracts' as *;
+@use 'reset' as *;
+
+//
+// Headings
+//
+.h1 {
+  @extend h1;
+}
+
+.h2 {
+  @extend h2;
+}
+
+.h3 {
+  @extend h3;
+}
+
+.h4 {
+  @extend h4;
+}
+
+.h5 {
+  @extend h5;
+}
+
+.h6 {
+  @extend h6;
+}
+
+.small {
+  @extend small;
+}
+
+p {
+  @include font-size($font-size-sm);
+  line-height: 1.8;
+  color: var(--accentLight);
+}
+
+// Lists
+.list-unstyled {
+  @include list-unstyled();
+}
+
+.heading {
+  font-size: 2rem;
+  font-size: clamp(1.75rem, 4vw, 2rem);
+  @include text(center);
+  @include weight(regular);
+  color: var(--accent);
+  letter-spacing: 4px;
+  @include margin(bottom, 2rem);
+}
+.subHeading {
+  text-transform: uppercase;
+  @include weight(smbold);
+  letter-spacing: 1px;
+}

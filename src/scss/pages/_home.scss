@@ -1,0 +1,112 @@
+@use '../abstracts' as *;
+@use '../base' as *;
+/*----------------Home----------------*/
+
+/*....section service
+...........................*/
+.section_service {
+  &_wrap {
+    .service_img {
+      height: 400px;
+      @include margin(bottom, 2rem);
+
+      img {
+        @extend %imgCover;
+      }
+    }
+  }
+}
+
+/*....section event
+...........................*/
+.section_event {
+  --flow-spacer: 1rem;
+
+  &_wrap {
+    @include margin(top, 2rem);
+  }
+}
+
+/*....section stage
+...........................*/
+.section_stage_wrap {
+  @include margin(top, 4rem);
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+
+  grid-gap: 2rem;
+
+  .box_title {
+    width: 100%;
+    max-width: 170px;
+    padding: 16px;
+    @include border($width: 2px, $color: var(--dark));
+    display: grid;
+    place-items: center;
+    margin: 0 auto 1.5rem;
+    @include font-size(6rem);
+  }
+  p {
+    @include font-size(1.25rem);
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+}
+
+/*....section testimonials
+...........................*/
+.testi_img {
+  img {
+    width: 100%;
+  }
+}
+.testi_content {
+  --flow-spacer: 3rem;
+  text-align: center;
+  @include margin(top, 3rem);
+  @include media-breakpoint-up(md) {
+    @include margin(top, 0);
+  }
+
+  p.author {
+    @include margin(top, 1rem);
+    @include font-size($font-size-xs);
+    letter-spacing: 4px;
+  }
+}
+
+/* links style */
+.links {
+  @include font-size($font-size-xs);
+  @include weight(bold);
+  text-decoration: none;
+  letter-spacing: 2px;
+  display: inline-block;
+  padding: 1rem 0;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--dark);
+    transform: translateX(-50%);
+    transition: all ease 0.7s;
+  }
+  &:hover::after {
+    width: 100%;
+    transition: all ease 0.7s;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25),
+  only screen and (min--moz-device-pixel-ratio: 1.25),
+  only screen and (-o-min-device-pixel-ratio: 1.25/1),
+  only screen and (min-device-pixel-ratio: 1.25),
+  only screen and (min-resolution: 200dpi),
+  only screen and (min-resolution: 1.25dppx) {
+}

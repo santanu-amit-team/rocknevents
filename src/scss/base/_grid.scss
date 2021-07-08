@@ -1,0 +1,339 @@
+@use '../abstracts' as *;
+
+// flex system
+
+.row {
+  @include make-row();
+  & + & {
+    margin-top: 0.75rem;
+  }
+
+  & > * {
+    @include make-col-ready();
+  }
+}
+
+.col {
+  flex: 1 0 0%;
+}
+.col-auto {
+  @include make-col-auto();
+}
+
+// column
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+    @include make-col($i, $grid-columns);
+  }
+}
+
+// row-column
+@for $i from 1 through $grid-columns {
+  .row-cols-#{$i} {
+    @include row-cols($i);
+  }
+}
+
+// offset
+@for $i from 0 through ($grid-columns - 1) {
+  @if not($i == 0) {
+    // Avoid emitting useless .offset-0
+    .offset-#{$i} {
+      @include make-col-offset($i, $grid-columns);
+    }
+  }
+}
+
+// with media query
+@each $media, $value in $grid-breakpoints {
+  @media (min-width: $value) {
+    .col-#{$media}-auto {
+      @include make-col-auto();
+    }
+
+    @for $i from 1 through $grid-columns {
+      .col-#{$media}-#{$i} {
+        @include make-col($i, $grid-columns);
+      }
+    }
+
+    @for $i from 1 through $grid-columns {
+      .row-col-#{$media}-#{$i} {
+        @include row-cols($i);
+      }
+    }
+
+    // offset
+    @for $i from 0 through ($grid-columns - 1) {
+      @if not($i == 0) {
+        .offset-#{$media}-#{$i} {
+          @include make-col-offset($i, $grid-columns);
+        }
+      }
+    }
+  }
+}
+
+// Gutters
+//
+// Make use of `.g-*`, `.gx-*` or `.gy-*` utilities to change spacing between the columns.
+@each $key, $value in $gutters {
+  .g-#{$key},
+  .gx-#{$key} {
+    --gutter-x: #{$value};
+  }
+
+  .g-#{$key},
+  .gy-#{$key} {
+    --gutter-y: #{$value};
+  }
+}
+
+// Gap
+//
+// Make use of `.gap-*` utilities to change spacing between the columns and rows.
+
+@each $prop, $abbrev in (gap: gap) {
+  @each $key, $value in $gap {
+    .#{$abbrev}-#{"" + $key} {
+      #{$prop}: $value;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $key, $value in $gap {
+        .#{$abbrev}-#{$media}-#{"" + $key} {
+          #{$prop}: $value;
+        }
+      }
+    }
+  }
+}
+
+// flex-direction
+
+@each $prop, $abbrev in (flex-direction: flex) {
+  @each $name in $flex-direction {
+    .#{$abbrev}-#{"" + $name} {
+      #{$prop}: $name;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $name in $flex-direction {
+        .#{$abbrev}-#{$media}-#{"" + $name} {
+          #{$prop}: $name;
+        }
+      }
+    }
+  }
+}
+
+// flex-wrap
+
+@each $prop, $abbrev in (flex-wrap: flex) {
+  @each $name in $flex-wrap {
+    .#{$abbrev}-#{"" + $name} {
+      #{$prop}: $name;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $name in $flex-wrap {
+        .#{$abbrev}-#{$media}-#{"" + $name} {
+          #{$prop}: $name;
+        }
+      }
+    }
+  }
+}
+
+// justify-content
+
+@each $prop, $abbrev in (justify-content: justify-content) {
+  @each $name, $value in $justify-content {
+    .#{$abbrev}-#{"" + $name} {
+      #{$prop}: $value;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $name, $value in $justify-content {
+        .#{$abbrev}-#{$media}-#{"" + $name} {
+          #{$prop}: $value;
+        }
+      }
+    }
+  }
+}
+
+// align-items
+
+@each $prop, $abbrev in (align-items: align-items) {
+  @each $name, $value in $align-items {
+    .#{$abbrev}-#{"" + $name} {
+      #{$prop}: $value;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $name, $value in $align-items {
+        .#{$abbrev}-#{$media}-#{"" + $name} {
+          #{$prop}: $value;
+        }
+      }
+    }
+  }
+}
+
+// align-content
+
+@each $prop, $abbrev in (align-content: align-content) {
+  @each $name, $value in $align-content {
+    .#{$abbrev}-#{"" + $name} {
+      #{$prop}: $value;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $name, $value in $align-content {
+        .#{$abbrev}-#{$media}-#{"" + $name} {
+          #{$prop}: $value;
+        }
+      }
+    }
+  }
+}
+
+// align-self
+
+@each $prop, $abbrev in (align-self: align-self) {
+  @each $name, $value in $align-self {
+    .#{$abbrev}-#{"" + $name} {
+      #{$prop}: $value;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $name, $value in $align-self {
+        .#{$abbrev}-#{$media}-#{"" + $name} {
+          #{$prop}: $value;
+        }
+      }
+    }
+  }
+}
+
+// order
+
+@each $prop, $abbrev in (order: order) {
+  @each $name, $value in $order {
+    .#{$abbrev}-#{"" + $name} {
+      #{$prop}: $value;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $name, $value in $order {
+        .#{$abbrev}-#{$media}-#{"" + $name} {
+          #{$prop}: $value;
+        }
+      }
+    }
+  }
+}
+
+// grid system
+
+// $span: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12) !default;
+
+// @each $value in $span {
+//   .span#{$value} {
+//     grid-column: span #{$value};
+//   }
+// }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  & > * {
+    box-sizing: border-box;
+  }
+}
+
+@for $i from 1 through $grid-columns {
+  .cols-#{$i} {
+    grid-template-columns: repeat(#{$i}, 1fr);
+  }
+  .span-#{$i} {
+    grid-column: span #{$i};
+    grid-row: span #{$i};
+  }
+  .col-span-#{$i} {
+    grid-column: span #{$i};
+  }
+  .row-span-#{$i} {
+    grid-row: span #{$i};
+  }
+}
+
+// with media query
+@each $media, $value in $grid-breakpoints {
+  @media (min-width: $value) {
+    @for $i from 1 through $grid-columns {
+      .cols-#{$media}-#{$i} {
+        grid-template-columns: repeat(#{$i}, 1fr);
+      }
+      .span-#{$media}-#{$i} {
+        grid-column: span #{$i};
+        grid-row: span #{$i};
+      }
+      .col-span-#{$media}-#{$i} {
+        grid-column: span #{$i};
+      }
+      .row-span-#{$media}-#{$i} {
+        grid-row: span #{$i};
+      }
+    }
+  }
+}
+
+// grid gap
+@each $prop, $abbrev in (grid: gg) {
+  @each $size, $length in $spacers {
+    .#{$abbrev}-#{$size} {
+      #{$prop}-gap: $length;
+    }
+    .#{$abbrev}r-#{$size} {
+      #{$prop}-row-gap: $length;
+    }
+    .#{$abbrev}c-#{$size} {
+      #{$prop}-column-gap: $length;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $size, $length in $spacers {
+        .#{$abbrev}-#{$media}-#{$size} {
+          #{$prop}-gap: $length;
+        }
+        .#{$abbrev}r-#{$media}-#{$size} {
+          #{$prop}-row-gap: $length;
+        }
+        .#{$abbrev}c-#{$media}-#{$size} {
+          #{$prop}-column-gap: $length;
+        }
+      }
+    }
+  }
+}

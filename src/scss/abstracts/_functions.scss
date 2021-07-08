@@ -1,0 +1,52 @@
+@use 'variables' as *;
+
+// ...............scss-docs-start color-functions.................
+
+// theme-colors map
+@function color($color-name) {
+  @return map-get($theme-colors, $color-name);
+}
+
+//set text color based on background
+@function set-text-color($color) {
+  @if (lightness($color) > 70) {
+    @return color(dark);
+  } @else {
+    @return color(light);
+  }
+}
+
+//set background and text color
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}
+
+// ...............scss-docs-end color-functions...............
+
+// font-family map
+@function family($font-name) {
+  @return map-get($font-family, $font-name);
+}
+
+// font-weight map
+@function weight($value) {
+  @return map-get($font-weight, $value);
+}
+
+// text-align map
+@function text($value) {
+  @return map-get($text-align, $value);
+}
+
+//font path
+$fonturl: "../webfonts/";
+@function font($font) {
+  @return url($fonturl + $font);
+}
+
+//img path
+$imgurl: "../images/";
+@function bg($img) {
+  @return url($imgurl + $img);
+}

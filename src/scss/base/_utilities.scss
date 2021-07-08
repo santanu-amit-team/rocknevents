@@ -1,0 +1,63 @@
+@use '../abstracts' as *;
+
+// Utilities
+
+// font weight
+
+@each $prop, $abbrev in (font-weight: fw) {
+  @each $weight, $value in $font-weight {
+    .#{$abbrev}-#{"" + $weight} {
+      #{$prop}: $value;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $weight, $value in $font-weight {
+        .#{$abbrev}-#{$media}-#{"" + $weight} {
+          #{$prop}: $value;
+        }
+      }
+    }
+  }
+}
+
+// text-align
+
+@each $prop, $abbrev in (text-align: text) {
+  @each $name, $value in $text-align {
+    .#{$abbrev}-#{"" + $name} {
+      #{$prop}: $value;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $name, $value in $text-align {
+        .#{$abbrev}-#{$media}-#{"" + $name} {
+          #{$prop}: $value;
+        }
+      }
+    }
+  }
+}
+
+// display
+
+@each $prop, $abbrev in (display: d) {
+  @each $name in $display {
+    .#{$abbrev}-#{"" + $name} {
+      #{$prop}: $name;
+    }
+  }
+  // with media query
+  @each $media, $value in $grid-breakpoints {
+    @media (min-width: $value) {
+      @each $name in $display {
+        .#{$abbrev}-#{$media}-#{"" + $name} {
+          #{$prop}: $name;
+        }
+      }
+    }
+  }
+}

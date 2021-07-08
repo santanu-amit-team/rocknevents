@@ -1,0 +1,22 @@
+@use '../abstracts' as *;
+/*----------------about us page----------------*/
+.section_events_tab + .section_events_tab {
+  @include margin(top, 5rem);
+}
+.events_img {
+  @include text(center);
+
+  &_box {
+    @include margin(bottom, 2rem);
+  }
+}
+
+.events_content {
+  --flow-spacer: 1em;
+
+  .title {
+    @include font-size($font-size-base);
+    @include weight(smbold);
+    letter-spacing: 2px;
+  }
+}

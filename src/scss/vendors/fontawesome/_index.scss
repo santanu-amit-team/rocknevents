@@ -1,0 +1,22 @@
+@use "fontawesome" as *;
+@use "solid";
+@use "brands";
+@use "regular";
+
+// use custom class in font-awesome
+.smile-bold {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-grin-wink);
+  }
+}
+.home {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-home);
+  }
+}

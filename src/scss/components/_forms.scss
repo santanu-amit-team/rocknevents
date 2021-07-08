@@ -1,0 +1,368 @@
+@use '../abstracts' as *;
+
+//
+// Form text
+//
+
+.form-text {
+  margin-top: $form-text-margin-top;
+  @include font-size($form-text-font-size);
+  font-style: $form-text-font-style;
+  font-weight: $form-text-font-weight;
+  color: $form-text-color;
+}
+
+//
+// Labels
+//
+
+.form-label {
+  margin-bottom: $form-label-margin-bottom;
+  @include font-size($form-label-font-size);
+  font-style: $form-label-font-style;
+  font-weight: $form-label-font-weight;
+  color: $form-label-color;
+}
+
+//
+// General form controls (plus a few specific high-level interventions)
+//
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: $input-padding-y-lg $input-padding-x-lg;
+  font-family: $input-font-family;
+  @include font-size($input-font-size-sm);
+  font-weight: $input-font-weight;
+  line-height: $input-line-height;
+  // color: $input-color;
+  // background-color: $input-bg;
+  @include set-background(color(secondary));
+  background-clip: padding-box;
+  border: $input-border-width solid $input-border-color;
+  appearance: none; // Fix appearance for date inputs in Safari
+
+  // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
+  @include border-radius($input-border-radius, 0);
+  transition: $input-transition;
+
+  &[type="file"] {
+    overflow: hidden; // prevent pseudo element button overlap
+
+    &:not(:disabled):not([readonly]) {
+      cursor: pointer;
+    }
+  }
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  &:focus {
+    color: $input-focus-color;
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    outline: 0;
+    @if $enable-shadows {
+      @include box-shadow($input-box-shadow, $input-focus-box-shadow);
+    } @else {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      box-shadow: $input-focus-box-shadow;
+    }
+  }
+
+  // Placeholder
+  &::placeholder {
+    color: $input-placeholder-color;
+    opacity: 1;
+  }
+
+  // Disabled and read-only inputs
+  &:disabled,
+  &[readonly] {
+    background-color: $input-disabled-bg;
+    border-color: $input-disabled-border-color;
+    opacity: 1;
+  }
+}
+
+// Readonly controls as plain text
+//
+// Apply class to a readonly input to make it appear like regular plain
+// text (without any border, background color, focus indicator)
+
+.form-control-plaintext {
+  display: block;
+  width: 100%;
+  padding: $input-padding-y 0;
+  margin-bottom: 0; // match inputs if this class comes on inputs with default margins
+  line-height: $input-line-height;
+  color: $input-plaintext-color;
+  background-color: transparent;
+  border: solid transparent;
+  border-width: $input-border-width 0;
+
+  &.form-control-sm,
+  &.form-control-lg {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+// Form control sizing
+//
+// Build on `.form-control` with modifier classes to decrease or increase the
+// height and font-size of form controls.
+
+.form-control-sm {
+  min-height: $input-height-sm;
+  padding: $input-padding-y-sm $input-padding-x-sm;
+  @include font-size($input-font-size-sm);
+  @include border-radius($input-border-radius-sm);
+}
+
+.form-control-lg {
+  min-height: $input-height-lg;
+  padding: $input-padding-y-lg $input-padding-x-lg;
+  @include font-size($input-font-size-lg);
+  @include border-radius($input-border-radius-lg);
+}
+
+// Make sure textareas don't shrink too much when resized
+textarea {
+  &.form-control {
+    min-height: $input-height;
+  }
+
+  &.form-control-sm {
+    min-height: $input-height-sm;
+  }
+
+  &.form-control-lg {
+    min-height: $input-height-lg;
+  }
+}
+
+/*----------------Forms----------------*/
+
+.form_container {
+  @include flow(0.5);
+
+  .form_area {
+    align-items: flex-end;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: bg("arrow_down.svg") no-repeat 98% var(--secondary);
+      background-size: 0.5rem;
+    }
+
+    // textarea {
+    //   width: 100%;
+    //   height: 7.5rem !important;
+    //   font-size: 0.875rem;
+    //   font-weight: 400;
+    //   line-height: 1.5;
+    //   padding: 0.375rem 0.75rem;
+    //   border: 1px solid $border-color;
+    //   @include set-background(color(light));
+    //   @include bd-radius(2px);
+    // }
+
+    .error {
+      background: bg("error.svg") no-repeat 98% var(--secondary);
+      background-size: 1rem;
+      border: 1px solid $danger;
+    }
+    .warning {
+      background: bg("warning.svg") no-repeat 98% var(--secondary);
+      background-size: 1rem;
+      border: 1px solid $warning;
+    }
+    .success {
+      background: bg("success.svg") no-repeat 98% var(--secondary);
+      background-size: 1rem;
+      border: 1px solid $success;
+    }
+    .error-msg {
+      display: none;
+      margin-top: 0.25rem;
+      color: $danger;
+      font-size: 0.875rem;
+    }
+
+    // check-box
+    .form-check + .form-check {
+      margin-left: 0.5em;
+    }
+    .form-check {
+      position: relative;
+      display: inline-block;
+
+      input[type="radio"] {
+        position: absolute;
+        visibility: hidden;
+      }
+
+      label {
+        display: inline-block;
+        position: relative;
+        font-weight: weight(light);
+        font-size: 1rem;
+        padding-left: 1.5em;
+        margin: 0;
+        z-index: 9;
+        cursor: pointer;
+        transition: all 0.25s linear;
+      }
+
+      &:hover label {
+        color: $primary;
+      }
+
+      .check {
+        display: block;
+        position: absolute;
+        border: 2px solid $black;
+        @include border-radius($border-radius-pill);
+        height: 1rem;
+        width: 1rem;
+        top: 0.25rem;
+        left: 0;
+        z-index: 5;
+        transition: border 0.25s linear;
+
+        &::before {
+          display: block;
+          position: absolute;
+          content: "";
+          border-radius: 100%;
+          height: 10px;
+          width: 10px;
+          top: 1px;
+          left: 1px;
+          margin: auto;
+          transition: background 0.25s linear;
+        }
+      }
+      &:hover .check {
+        border: 5px solid $border-color;
+      }
+    }
+
+    // check-box
+    .label-cbx {
+      user-select: none;
+      cursor: pointer;
+      margin-bottom: 0;
+
+      input:checked + .checkbox {
+        border-color: $blue;
+
+        svg path {
+          fill: $blue;
+        }
+
+        svg polyline {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      &:hover .checkbox svg path {
+        stroke-dashoffset: 0;
+      }
+
+      .checkbox {
+        position: relative;
+        float: left;
+        width: 18px;
+        height: 18px;
+        border: 2px solid $border-color;
+        border-radius: 3px;
+        box-sizing: border-box;
+        top: 2px;
+
+        svg {
+          position: absolute;
+          top: -2px;
+          left: -2px;
+
+          path {
+            fill: none;
+            stroke: $blue;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 71px;
+            stroke-dashoffset: 71px;
+            transition: all 0.6s ease;
+          }
+
+          polyline {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 18px;
+            stroke-dashoffset: 18px;
+            transition: all 0.3s ease;
+          }
+        }
+      }
+
+      > span {
+        pointer-events: none;
+        vertical-align: middle;
+        padding-left: 0.5rem;
+        color: var(--clr-content);
+      }
+
+      .invisible {
+        position: absolute;
+        z-index: -1;
+        width: 0;
+        height: 0;
+        opacity: 0;
+      }
+    }
+
+    .cntr {
+      position: relative;
+      width: 250px;
+      text-align: center;
+      margin: 50px auto 0px;
+    }
+
+    input[type="radio"]:checked ~ .check {
+      border: 2px solid #333;
+    }
+    input[type="radio"]:checked ~ .check::before {
+      background: #333;
+    }
+    input[type="radio"]:checked ~ label {
+      color: #333;
+    }
+  }
+}
+
+/*custom form style*/
+.form_container {
+  --flow-spacer: 1rem;
+  .form-control:focus {
+    box-shadow: none;
+    border-color: var(--dark);
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.25),
+  only screen and (min--moz-device-pixel-ratio: 1.25),
+  only screen and (-o-min-device-pixel-ratio: 1.25/1),
+  only screen and (min-device-pixel-ratio: 1.25),
+  only screen and (min-resolution: 200dpi),
+  only screen and (min-resolution: 1.25dppx) {
+}

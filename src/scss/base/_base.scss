@@ -1,0 +1,122 @@
+@use '../abstracts' as *;
+
+// extend files
+%imgCover {
+  @include size(100%);
+  object-fit: cover;
+}
+
+//flow gap
+.flow {
+  @include flow();
+}
+.clearfix {
+  @include clearfix();
+}
+
+// Width and height
+@each $prop, $abbrev in (width: w, height: h) {
+  @each $size, $length in $sizes {
+    .#{$abbrev}-#{$size} {
+      #{$prop}: $length !important;
+    }
+  }
+}
+@each $media, $value in $grid-breakpoints {
+  @media (min-width: $value) {
+    @each $prop, $abbrev in (width: w, height: h) {
+      @each $size, $length in $sizes {
+        .#{$abbrev}-#{$media}-#{$size} {
+          #{$prop}: $length !important;
+        }
+      }
+    }
+  }
+}
+
+.mw-100 {
+  max-width: 100% !important;
+}
+.mh-100 {
+  max-height: 100% !important;
+}
+// Viewport additional helpers
+.min-vw-100 {
+  min-width: 100vw !important;
+}
+.min-vh-100 {
+  min-height: 100vh !important;
+}
+.vw-100 {
+  width: 100vw !important;
+}
+.vh-100 {
+  height: 100vh !important;
+}
+
+//responsive
+// @include media-breakpoint-down(sm) {
+//   .w-25,
+//   .w-50,
+//   .w-75,
+//   .w-100 {
+//     width: 100% !important;
+//   }
+// }
+
+// color scheme in class name
+@each $color, $value in $theme-colors {
+  .text-#{"" + $color} {
+    color: $value;
+  }
+  .bg-#{"" + $color} {
+    background-color: $value;
+  }
+}
+
+/*.....scroll to top
+......................*/
+.scrollup {
+  @include set-background(color(light));
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+  @include text(center);
+  font-size: 1.5rem;
+  line-height: 1.7;
+  cursor: pointer;
+  position: fixed;
+  bottom: 3rem;
+  right: 2rem;
+  padding: 0.25rem;
+  display: none;
+
+  i {
+    padding: 0;
+  }
+}
+.container {
+  max-width: 71.25rem;
+  width: 100%;
+}
+.headerSpacer {
+  @include margin(top, 10rem);
+}
+.spacer {
+  @include margin(bottom, 6rem);
+}
+.doubleLine {
+  @include border(top);
+  @include border(bottom);
+  @include padding($value: 1.5rem);
+}
+.d-flex {
+  display: flex;
+}
+.d-grid {
+  display: flex;
+}
+.filter:hover {
+  -webkit-filter: opacity(50%);
+  filter: opacity(60%);
+}

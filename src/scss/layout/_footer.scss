@@ -1,0 +1,41 @@
+@use '../abstracts' as *;
+/*----------------Footer----------------*/
+.section_footer {
+  @include set-background(color(secondary));
+  // margin-top: auto;
+
+  &_wrap {
+    padding: 2rem 0;
+    @include flow(2.5);
+
+    img.logo {
+      max-width: 160px;
+      margin: auto;
+    }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      li {
+        @include font-size(1.5rem);
+        padding: 0 0.5rem;
+      }
+    }
+
+    .footerLinks {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      li {
+        padding: 0 0.25rem;
+
+        a {
+          color: var(--accent);
+        }
+      }
+    }
+  }
+}

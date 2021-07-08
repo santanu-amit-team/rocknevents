@@ -1,0 +1,19 @@
+@use '../variables' as *;
+
+// Margin and Padding
+
+@mixin margin($position: false, $value: 0.5rem) {
+  @if $position {
+    margin-#{$position}: $value;
+  } @else {
+    margin: $value;
+  }
+}
+
+@mixin padding($position: false, $value: 0.5rem) {
+  @if $position {
+    padding-#{$position}: $value;
+  } @else {
+    padding: $value;
+  }
+}

@@ -1,0 +1,17 @@
+@use '../variables' as *;
+@use '../functions' as *;
+
+// font-family
+@mixin family($value) {
+  font-family: family($value); // using font-family map function
+}
+
+// font-weight
+@mixin weight($value) {
+  font-weight: weight($value); // using font-weight map function
+}
+
+// text-align
+@mixin text($value) {
+  text-align: text($value); // using text-align map function
+}

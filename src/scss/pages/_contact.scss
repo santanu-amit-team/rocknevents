@@ -1,0 +1,39 @@
+@use '../abstracts' as *;
+@use '../base' as *;
+/*----------------contact----------------*/
+.section_contactForm {
+  &_wrap {
+    h6 {
+      text-transform: uppercase;
+      @include font-size($font-size-base);
+      @include weight(smbold);
+      color: var(--accent);
+      @include margin(bottom, 1rem);
+      letter-spacing: 1px;
+    }
+  }
+  .content_form {
+    @include margin(bottom, 2rem);
+  }
+}
+
+.contact_sidebar {
+  &_box + &_box {
+    @include margin(top, 2rem);
+  }
+  .sidebar_img {
+    width: 100%;
+    height: 350px;
+
+    img {
+      @extend %imgCover;
+    }
+  }
+  .sidebar_content {
+    --flow-spacer: 1em;
+    @include margin(top, 2rem);
+    h2 {
+      @include text(start);
+    }
+  }
+}

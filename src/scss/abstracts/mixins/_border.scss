@@ -1,0 +1,15 @@
+@use '../variables' as *;
+
+//border
+@mixin border(
+  $position: false,
+  $width: $border-width,
+  $color: $border-color,
+  $style: solid
+) {
+  @if $position {
+    border-#{$position}: $width $color $style;
+  } @else {
+    border: $width $color $style;
+  }
+}

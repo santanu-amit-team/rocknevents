@@ -1,0 +1,59 @@
+Ref website: https://sass-guidelin.es/#architecture
+
+The 7-1 Pattern:
+..................................................
+sass/
+|
+|– abstracts/
+|   |– _variables.scss    # Sass Variables
+|   |– _functions.scss    # Sass Functions
+|   |– _mixins.scss       # Sass Mixins
+|
+|– base/
+|   |– _reset.scss        # Reset/normalize
+|   |– _typography.scss   # Typography rules
+|   …                     # Etc.
+|
+|– components/
+|   |– _global.scss       # global
+|   |– _buttons.scss      # Buttons
+|   |– _list.scss         # list
+|   …                     # Etc.
+|
+|– layout/
+|   |– _navigation.scss   # Navigation
+|   |– _grid.scss         # Grid system
+|   |– _header.scss       # Header
+|   |– _footer.scss       # Footer
+|   |– _sidebar.scss      # Sidebar
+|   |– _forms.scss        # Forms
+|   …                     # Etc.
+|
+|– pages/
+|   |– _home.scss         # Home specific styles
+|   |– _contact.scss      # Contact specific styles
+|   …                     # Etc.
+|
+|– themes/
+|   |– _theme.scss        # Default theme
+|   |– _admin.scss        # Admin theme
+|   …                     # Etc.
+|
+|– vendors/
+|   |– _bootstrap.scss    # Bootstrap
+|   |– _jquery-ui.scss    # jQuery UI
+|   …                     # Etc.
+|
+`– main.scss              # Main Sass file
+
+..................................................
+
+Files should be imported according to the folder they live in, one after the other in the following order:
+
+1. abstracts/
+2. vendors/
+3. base/
+4. components/
+5. layout/
+6. pages/
+7. themes/

@@ -1,0 +1,21 @@
+@use '../abstracts' as *;
+@use '../base' as *;
+/*----------------pricing page----------------*/
+.section_pricing {
+  &_img {
+    height: 400px;
+
+    img {
+      @extend %imgCover;
+    }
+  }
+  &_content {
+    --flow-spacer: 1rem;
+    padding: 2rem 0 3rem;
+
+    .priceTag {
+      @include text(center);
+      @extend .subHeading;
+    }
+  }
+}
